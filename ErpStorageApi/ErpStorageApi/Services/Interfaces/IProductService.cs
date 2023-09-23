@@ -2,7 +2,7 @@
 
 namespace ErpStorageApi.Services.Interfaces
 {
-    public interface IProductsService
+    public interface IProductService
     {
         Task AddProduct(Product product);
         Task DeleteProduct(Product product);

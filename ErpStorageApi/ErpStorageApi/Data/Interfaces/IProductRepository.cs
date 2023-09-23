@@ -2,7 +2,7 @@
 
 namespace ErpStorageApi.Data.Interfaces
 {
-    public interface IProductsRepository
+    public interface IProductRepository
     {
         Task Add(Product product);
         Task Update(Product product);

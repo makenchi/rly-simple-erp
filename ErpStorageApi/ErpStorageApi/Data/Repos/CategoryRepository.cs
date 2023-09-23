@@ -4,19 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ErpStorageApi.Data.Repos
 {
-    public class ProductsRepository : IProductsRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _context;
-        public ProductsRepository(DataContext context)
+        public CategoryRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Product product)
+        public async Task Add(Category category)
         {
             try
             {
-                _context.Products.Add(product);
+                _context.Categories.Add(category);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -25,11 +25,11 @@ namespace ErpStorageApi.Data.Repos
             }
         }
 
-        public async Task Delete(Product product)
+        public async Task Delete(Category category)
         {
             try
             {
-                _context.Products.Remove(product);
+                _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -38,26 +38,21 @@ namespace ErpStorageApi.Data.Repos
             }
         }
 
-        public async Task<List<Product>> GetAll()
+        public async Task<List<Category>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-        public async Task<List<Product>> GetByCategory(int categoryId)
+        public Task<Category> GetById(int id)
         {
-            return await _context.Products.AsNoTracking().Where(x => x.CategoryId == categoryId).ToListAsync();
+            return _context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Product> GetById(int id)
-        {
-            return await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task Update(Product product)
+        public async Task Update(Category category)
         {
             try
             {
-                _context.Products.Update(product);
+                _context.Categories.Update(category);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

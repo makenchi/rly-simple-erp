@@ -2,7 +2,7 @@
 
 namespace ErpStorageApi.Services.Interfaces
 {
-    public interface ICategoriesService
+    public interface ICategoryService
     {
         Task AddCategory(Category category);
         Task DeleteCategory(Category category);

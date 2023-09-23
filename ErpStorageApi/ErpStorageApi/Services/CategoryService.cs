@@ -4,13 +4,14 @@ using ErpStorageApi.Services.Interfaces;
 
 namespace ErpStorageApi.Services
 {
-    public class CategoriesService : ICategoriesService
+    public class CategoryService : ICategoryService
     {
-        private readonly ICategoriesRepository _categoriesRepository;
-        public CategoriesService(ICategoriesRepository categoriesRepository)
+        private readonly ICategoryRepository _categoriesRepository;
+        public CategoryService(ICategoryRepository categoriesRepository)
         {
             _categoriesRepository = categoriesRepository;
         }
+
         public async Task AddCategory(Category category)
         {
             await _categoriesRepository.Add(category);
