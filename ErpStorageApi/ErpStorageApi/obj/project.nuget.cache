@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "53w9oYEyaLwbuOqIpSN/z4TTT5omk2kac+bBbQO8ishzZlKSQFyp4ay8XZGUx5IJ7DIFk5Vcj6K1PVTQ9TSojg==",
+  "success": true,
+  "projectFilePath": "F:\\Makenchi's Dungeon\\Projetos\\GitHub\\rly-simple-erp\\ErpStorageApi\\ErpStorageApi\\ErpStorageApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Makenchi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Makenchi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Makenchi\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Makenchi\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Makenchi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Makenchi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
