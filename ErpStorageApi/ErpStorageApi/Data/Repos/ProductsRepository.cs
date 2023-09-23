@@ -4,19 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ErpStorageApi.Data.Repos
 {
-    public class CategoriesRepository : ICategoriesRepository
+    public class ProductsRepository : IProductsRepository
     {
         private readonly DataContext _context;
-        public CategoriesRepository(DataContext context)
+        public ProductsRepository(DataContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Category category)
+        public async Task Add(Product product)
         {
             try
             {
-                _context.Categories.Add(category);
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -25,11 +25,11 @@ namespace ErpStorageApi.Data.Repos
             }
         }
 
-        public async Task Delete(Category category)
+        public async Task Delete(Product product)
         {
             try
             {
-                _context.Categories.Remove(category);
+                _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -38,21 +38,26 @@ namespace ErpStorageApi.Data.Repos
             }
         }
 
-        public async Task<List<Category>> GetAll()
+        public async Task<List<Product>> GetAll()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Products.ToListAsync();
         }
 
-        public Task<Category> GetById(int id)
+        public async Task<List<Product>> GetByCategory(int categoryId)
         {
-            return _context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Products.AsNoTracking().Where(x => x.CategoryId == categoryId).ToListAsync();
         }
 
-        public async Task Update(Category category)
+        public async Task<Product> GetById(int id)
+        {
+            return await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task Update(Product product)
         {
             try
             {
-                _context.Categories.Update(category);
+                _context.Products.Update(product);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
