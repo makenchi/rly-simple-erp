@@ -137,5 +137,37 @@ namespace ErpStorageApi.Controllers
 
             return BadRequest(response);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<GetCategoriesResponseDto>> GetCategories()
+        {
+            GetCategoriesResponseDto response = new GetCategoriesResponseDto();
+            try
+            {
+                var categories = await _categoryService.GetAllCategories();
+
+                response.Code = 200;
+                response.Message = string.Format("Found {0} categories", categories.Count);
+                response.Categories = new List<CategoryDto>();
+
+                foreach (var category in categories)
+                {
+                    response.Categories.Add(new CategoryDto()
+                    {
+                        Id = category.Id,
+                        Name = category.Name
+                    });
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Code = ex.HResult;
+                response.Message = ex.Message;
+            }
+
+            return BadRequest(response);
+        }
     }
 }
