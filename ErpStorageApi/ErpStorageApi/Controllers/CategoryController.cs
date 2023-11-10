@@ -1,4 +1,5 @@
 ﻿using ErpStorageApi.Dtos;
+using ErpStorageApi.Entities;
 using ErpStorageApi.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,22 @@ namespace ErpStorageApi.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult<AddCategoryResponseDto>> AddCategory(AddCategoryRequestDto request)
+        public async Task<ActionResult<AddCategoryResponseDto>> AddCategory(AddCategoryRequestDto request)
         {
             AddCategoryResponseDto response = new AddCategoryResponseDto();
             try
             {
+                Category newCategory = new Category()
+                {
+                    Name = request.Name
+                };
 
+                await _categoryService.AddCategory(newCategory);
+
+                response.Code = 200;
+                response.Message = "Category added sucessifully";
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
