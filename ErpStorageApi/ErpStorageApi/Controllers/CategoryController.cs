@@ -103,5 +103,39 @@ namespace ErpStorageApi.Controllers
 
             return BadRequest(response);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetCategoryByIdResponseDto>> GetCategory(int id)
+        {
+            GetCategoryByIdResponseDto response = new GetCategoryByIdResponseDto();
+            try
+            {
+                var category = await _categoryService.GetCategoryById(id);
+                if (category == null)
+                {
+                    response.Code = 404;
+                    response.Message = "Category not found";
+
+                    return NotFound(response);
+                }
+
+                response.Code = 200;
+                response.Message = "Category found";
+                response.Category = new CategoryDto()
+                {
+                    Id = category.Id,
+                    Name = category.Name
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Code = ex.HResult;
+                response.Message = ex.Message;
+            }
+
+            return BadRequest(response);
+        }
     }
 }
