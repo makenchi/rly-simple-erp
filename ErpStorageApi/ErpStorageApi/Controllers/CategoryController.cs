@@ -49,7 +49,7 @@ namespace ErpStorageApi.Controllers
             UpdateCategoryResponseDto response = new UpdateCategoryResponseDto();
             try
             {
-                var category = await _categoryService.GetCategoryById(request.id);
+                var category = await _categoryService.GetCategoryById(request.Id);
                 if (category == null)
                 {
                     response.Code = 404;
@@ -58,7 +58,7 @@ namespace ErpStorageApi.Controllers
                     return NotFound(response);
                 }
 
-                category.Name = request.name;
+                category.Name = request.Name;
                 await _categoryService.UpdateCategory(category);
 
                 response.Code = 200;
@@ -74,6 +74,34 @@ namespace ErpStorageApi.Controllers
             return BadRequest(response);
         }
 
+        [HttpDelete]
+        public async Task<ActionResult<DeleteCategoryResponseDto>> DeleteCategory(DeleteCategoryRequestDto request)
+        {
+            DeleteCategoryResponseDto response = new DeleteCategoryResponseDto();
+            try
+            {
+                var category = await _categoryService.GetCategoryById(request.Id);
+                if (category == null)
+                {
+                    response.Code = 404;
+                    response.Message = "Category not found";
 
+                    return NotFound(response);
+                }
+
+                await _categoryService.DeleteCategory(category);
+
+                response.Code = 200;
+                response.Message = "Category deleted";
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Code = ex.HResult;
+                response.Message = ex.Message;
+            }
+
+            return BadRequest(response);
+        }
     }
 }
