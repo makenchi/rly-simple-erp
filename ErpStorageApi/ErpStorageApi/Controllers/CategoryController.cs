@@ -1,4 +1,4 @@
-﻿using ErpStorageApi.Dtos;
+﻿using ErpStorageApi.Dtos.Category;
 using ErpStorageApi.Entities;
 using ErpStorageApi.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
