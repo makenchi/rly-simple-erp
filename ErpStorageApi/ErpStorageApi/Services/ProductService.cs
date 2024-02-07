@@ -1,4 +1,5 @@
 ﻿using ErpStorageApi.Data.Interfaces;
+using ErpStorageApi.Dtos.Product;
 using ErpStorageApi.Entities;
 using ErpStorageApi.Services.Interfaces;
 
@@ -7,14 +8,31 @@ namespace ErpStorageApi.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productsRepository;
-        public ProductService(IProductRepository productsRepository)
+        private readonly ICategoryService _categoryService;
+        public ProductService(IProductRepository productsRepository, ICategoryService categoryService)
         {
             _productsRepository = productsRepository;
+            _categoryService = categoryService;
         }
 
         public async Task AddProduct(Product product)
         {
             await _productsRepository.Add(product);
+        }
+
+        public async Task CreateProduct(ProductDto product)
+        {
+            Product newProduct = new Product()
+            {
+                Name = product.Name,
+                Description = product.Description,
+                ProductId = product.ProductId,
+                CreatedAt = (DateTime)product.CreatedAt,
+                Quantity = (int)product.Quantity,
+                CategoryId = (int)product.CategoryId
+            };
+
+            await AddProduct(newProduct);
         }
 
         public async Task DeleteProduct(Product product)
